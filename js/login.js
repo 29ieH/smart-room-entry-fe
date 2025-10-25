@@ -63,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
         backgroundColor: "#4ade80",
       }).showToast();
       localStorage.setItem("accessToken", data.data.token);
-      if (requestPermissionNotification()) {
+      const canNotify = await requestPermissionNotification();
+      if (canNotify) {
         await window.sendSubscriptionToServer(data.data.token);
       }
       setTimeout(() => {
