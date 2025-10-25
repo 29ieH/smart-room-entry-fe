@@ -62,9 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
         position: "right",
         backgroundColor: "#4ade80",
       }).showToast();
-      await requestPermissionNotification();
       localStorage.setItem("accessToken", data.data.token);
-      if (localStorage.getItem("notificationPermission")) {
+      if (requestPermissionNotification()) {
         await window.sendSubscriptionToServer(data.data.token);
       }
       setTimeout(() => {
@@ -90,11 +89,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function requestPermissionNotification() {
-  let notificationPermission = localStorage.getItem("notificationPermission");
-  if (notificationPermission) {
-    console.log("Đã chấp nhận thông báo");
+  const currentPermission = Notification.permission;
+
+  if (currentPermission === "granted") {
+    console.log("🔔 Người dùng đã cho phép thông báo");
+    return true;
+  }
+
+  const result = await Notification.requestPermission();
+  if (result === "granted") {
+    console.log("✅ Người dùng cho phép thông báo");
+    return true;
   } else {
-    await Notification.requestPermission();
-    localStorage.setItem("notificationPermission", true);
+    console.warn("🚫 Người dùng từ chối thông báo");
+    return false;
   }
 }
