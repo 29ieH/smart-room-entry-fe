@@ -7,7 +7,7 @@ async function registerServiceWorker() {
   try {
     // Đăng ký service-worker.js (nên đặt ở root)
     const registration = await navigator.serviceWorker.register(
-      "/service-worker.js"
+      "/smart-room-entry-fe/service-worker.js"
     );
     console.log("✅ Service Worker registered:", registration);
 
