@@ -31,7 +31,6 @@ async function getOrCreateSubscription() {
 async function sendSubscriptionToServer(accessToken) {
   const subscription = await getOrCreateSubscription();
   if (!subscription) return;
-
   const res = await fetch(`${baseUrl}/push-notify/subscribe`, {
     method: "POST",
     headers: {
@@ -40,12 +39,12 @@ async function sendSubscriptionToServer(accessToken) {
     },
     body: JSON.stringify(subscription),
   });
-
   if (res.ok) {
     console.log("📨 Subscription sent to server successfully");
   } else {
     console.error("❌ Lỗi gửi subscription:", await res.text());
   }
+  return subscription;
 }
 
 window.sendSubscriptionToServer = sendSubscriptionToServer;

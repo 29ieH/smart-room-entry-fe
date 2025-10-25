@@ -66,7 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const canNotify = await requestPermissionNotification();
       if (canNotify) {
         console.log("Can notify");
-        await window.sendSubscriptionToServer(data.data.token);
+        console.log(
+          "Subscription:: ",
+          await window.sendSubscriptionToServer(data.data.token)
+        );
+        console.log("send notify success");
       }
       console.log("Set timeout !!!");
       setTimeout(() => {
