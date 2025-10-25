@@ -65,8 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("accessToken", data.data.token);
       const canNotify = await requestPermissionNotification();
       if (canNotify) {
+        console.log("Can notify");
         await window.sendSubscriptionToServer(data.data.token);
       }
+      console.log("Set timeout !!!");
       setTimeout(() => {
         window.location.href = "/smart-room-entry-fe/pages/log-access.html";
       }, 1000);
