@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lịch sử ra vào nhà trọ</title>
+    <title>Lịch sử xe vào nhà trọ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -34,15 +34,15 @@
       </div>
 
       <nav class="flex-1 px-4 py-6 space-y-2">
-       <a
+        <a
           href="/smart-room-entry-fe/pages/log-access.html"
-          class="flex items-center px-4 py-2 rounded-lg bg-white/10 transition"
+          class="flex items-center px-4 py-2 rounded-lg hover:bg-white/10 transition"
         >
           <i class="fa-solid fa-clock-rotate-left mr-3"></i> Lịch sử ra vào
         </a>
          <a
           href="/smart-room-entry-fe/pages/log-vehicle-entry.html"
-          class="flex items-center px-4 py-2 rounded-lg hover:bg-white/10 transition"
+          class="flex items-center px-4 py-2 rounded-lg bg-white/10 transition"
         >
           <i class="fa-solid fa-motorcycle mr-3"></i> Lịch sử xe vào nhà trọ
         </a>
@@ -76,7 +76,7 @@
           >
             <i class="fa-solid fa-bars text-2xl"></i>
           </button>
-          <h2 class="text-lg font-semibold md:hidden">Lịch sử ra vào</h2>
+          <h2 class="text-lg font-semibold md:hidden">Lịch sử xe vào nhà trọ</h2>
         </div>
 
         <div class="flex items-center space-x-6 relative">
@@ -146,7 +146,7 @@
       <!-- Dashboard -->
       <main class="p-6 overflow-y-auto flex-1 space-y-6">
         <h2 class="text-2xl font-semibold mb-6 hidden md:block">
-          Lịch sử ra vào
+          Lịch sử xe vào nhà trọ
         </h2>
 
           <div class="bg-white p-4 rounded-2xl shadow-md">
@@ -202,20 +202,6 @@
         class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-auto"
       />
     </div>
-
-    <!-- Filter phương thức mở cửa -->
-    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-      <label for="unlockMethod" class="text-sm text-gray-700">Phương thức:</label>
-      <select
-        id="unlockMethod"
-        class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-auto"
-      >
-        <option value="">Tất cả</option>
-        <option value="CARD">Thẻ từ</option>
-        <option value="FINGERPRINT">Vân tay</option>
-        <option value="PASSWORD">Mật khẩu</option>
-      </select>
-    </div>
     </div>
     <!-- Chọn số lượng dòng -->
     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
@@ -240,7 +226,7 @@
           <input
             id="searchBoxLog"
             type="text"
-            placeholder="Tìm kiếm theo số phòng, tên định danh khoá.."
+            placeholder="Tìm kiếm theo số phòng, biển số xe, hãng xe..."
             class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-200 outline-none w-full md:w-96"
           />
         </div>
@@ -254,10 +240,9 @@
               <tr>
                 <th class="px-6 py-3">ID</th>
                 <th class="px-6 py-3">Mã phòng</th>
-                <th class="px-6 py-3">Tên định danh khoá</th>
-                <th class="px-6 py-3">Vào</th>
-                <th class="px-6 py-3">Ra</th>
-                <th class="px-6 py-3">Phương thức</th>
+                <th class="px-6 py-3">Biển số xe</th>
+                <th class="px-6 py-3">Hãng xe</th>
+                <th class="px-6 py-3">Màu sắc</th>
                 <th class="px-6 py-3">Ghi chú</th>
                 <th class="px-6 py-3">Thời gian</th>
               </tr>
@@ -296,7 +281,7 @@
     </div>
    <script src="../js/auth.js"></script>
     <script src="../js/navigator.js"></script>
-    <script src="../js/access-log.js"></script>
+    <script src="../js/vehicle-entry-log.js"></script>
     <script src="../js/notifications.js"></script>
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   </body>

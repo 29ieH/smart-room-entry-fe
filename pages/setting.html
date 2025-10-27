@@ -47,14 +47,14 @@
         </a>
         <a
           href="/smart-room-entry-fe/pages/room.html"
-          class="flex items-center px-4 py-2 rounded-lg bg-white/10 transition"
+          class="flex items-center px-4 py-2 rounded-lg hover:bg-white/10 transition"
         >
           <i class="fa-solid fa-door-open mr-3"></i> Phòng
         </a>
 
         <a
           href="/smart-room-entry-fe/pages/setting.html"
-          class="flex items-center px-4 py-2 rounded-lg hover:bg-white/10 transition"
+          class="flex items-center px-4 py-2 rounded-lg bg-white/10 transition"
         >
           <i class="fa-solid fa-gear mr-3"></i> Cài đặt
         </a>
@@ -146,93 +146,51 @@
       </header>
 
       <!-- MAIN CONTENT -->
-      <main class="p-6 overflow-y-auto flex-1 space-y-6">
-        <h2 class="text-2xl font-semibold mb-6 hidden md:block">
-          Thông tin phòng
-        </h2>
+<main class="p-6 overflow-y-auto flex-1 space-y-6">
+  <h2 class="text-2xl font-semibold mb-6">⚙️ Cài đặt hệ thống</h2>
 
-        <!-- Bộ lọc (ẩn trên mobile) -->
-        <div class="bg-white p-4 rounded-2xl shadow-md">
-          <div class="flex justify-between items-center mb-3 lg:hidden">
-            <h2 class="text-lg font-semibold text-gray-800">Bộ lọc</h2>
-            <button
-              id="toggleFilterBtn"
-              class="text-blue-600 hover:text-blue-800 focus:outline-none p-2 rounded-full hover:bg-blue-50 transition"
-            >
-              <i id="toggleIcon" class="fa-solid fa-filter text-lg"></i>
-            </button>
-          </div>
+  <div class="bg-white rounded-2xl shadow-md p-6 sm:p-8">
+<form id="settingsForm" class="space-y-5">
 
-          <div
-            id="filterContainer"
-            class="flex flex-col lg:flex-row lg:items-center gap-4 transition-all duration-300 overflow-hidden lg:max-h-full lg:opacity-100 lg:visible max-h-0 opacity-0 invisible"
-          >
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-              <label for="searchBoxLog" class="text-sm text-gray-700"
-                >Tìm kiếm:</label
-              >
-              <input
-                id="searchBoxLog"
-                type="text"
-                placeholder="Nhập mã phòng..."
-                class="px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 w-full sm:w-80"
-              />
-            </div>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 relative">
+    <label class="font-medium text-gray-700">Giới hạn dưới số người trong phòng <span class="text-red-500 ">*</span></label>
+    <div class="w-full sm:w-1/2">
+      <input type="number" data-key="bellow_min_occupancy"
+        class="setting-input border rounded-lg px-3 py-2 w-full focus:ring focus:ring-blue-200 focus:outline-none">
+      <p class="error-text text-red-500 text-sm mt-1 hidden"></p>
+    </div>
+  </div>
 
-            <div
-              class="flex flex-col sm:flex-row items-start sm:items-center gap-2"
-            >
-              <label for="pageSizeSelect" class="text-sm text-gray-700"
-                >Số lượng dòng:</label
-              >
-              <select
-                id="pageSizeSelect"
-                class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-auto"
-              >
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="40">40</option>
-                <option value="60">60</option>
-                <option value="100">100</option>
-              </select>
-            </div>
-          </div>
-        </div>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 relative">
+    <label class="font-medium text-gray-700">Giới hạn trên số người trong phòng <span class="text-red-500 ">*</span> </label>
+    <div class="w-full sm:w-1/2">
+      <input type="number" data-key="above_max_occupancy"
+        class="setting-input border rounded-lg px-3 py-2 w-full focus:ring focus:ring-blue-200 focus:outline-none">
+      <p class="error-text text-red-500 text-sm mt-1 hidden"></p>
+    </div>
+  </div>
 
-        <!-- TABLE (PC) -->
-        <div
-          class="overflow-x-auto bg-white rounded-2xl shadow-md hidden md:block"
-        >
-          <table class="min-w-full text-sm text-left border-collapse">
-            <thead class="bg-gray-100 text-gray-700 uppercase">
-              <tr>
-                <th class="px-6 py-3">ID</th>
-                <th class="px-6 py-3">Mã phòng</th>
-                <th class="px-6 py-3 text-center">Số người hiện tại</th>
-                <th class="px-6 py-3 text-center">Số người quy định</th>
-                <th class="px-6 py-3 text-center">Trạng thái</th>
-                <th class="px-6 py-3 text-center">Thao tác</th>
-              </tr>
-            </thead>
-            <tbody id="historyTableBody" class="divide-y divide-gray-200">
-              <!-- Render bằng JS -->
-            </tbody>
-          </table>
-        </div>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 relative">
+    <label class="font-medium text-gray-700">Khoảng thời gian cập nhật thông báo (phút) <span class="text-red-500 ">*</span></label>
+    <div class="w-full sm:w-1/2">
+      <input type="number" data-key="notify_current_people_room"
+        class="setting-input border rounded-lg px-3 py-2 w-full focus:ring focus:ring-blue-200 focus:outline-none">
+      <p class="error-text text-red-500 text-sm mt-1 hidden"></p>
+    </div>
+  </div>
 
-        <!-- CARD (MOBILE/TABLET) -->
-        <div
-          id="cardContainer"
-          class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden"
-        >
-          <!-- Render bằng JS -->
-        </div>
+  <!-- Nút lưu cố định góc phải -->
+  <div class="pt-6 text-right">
+    <button id="saveBtn" type="submit"
+      class="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+      Lưu thay đổi
+    </button>
+  </div>
+</form>
 
-        <div
-          id="pagination"
-          class="flex items-center justify-center gap-2 mt-6 select-none"
-        ></div>
-      </main>
+  </div>
+</main>
+
  <div id="logPopup" class="fixed top-20 right-5 hidden w-80 bg-white shadow-lg border border-gray-200 rounded-lg p-4 z-50">
   <div class="flex justify-between items-start cursor-pointer">
     <div>
@@ -270,7 +228,7 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script src="../js/auth.js"></script>
   <script src="../js/modal.js"></script>
-  <script src="../js/rooms.js"></script>
+  <script src="../js/setting.js"></script>
   <script src="../js/notifications.js"></script>
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     </div>
