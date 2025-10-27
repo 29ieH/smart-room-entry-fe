@@ -4,7 +4,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const inputs = document.querySelectorAll(".setting-input");
   const baseUrl = "https://smart-room-entry-be-v1-0.onrender.com";
   let originalSettings = {};
+  const sidebar = document.getElementById("sidebar");
+  const menuBtn = document.getElementById("menuToggleBtn");
+  const closeBtn = document.getElementById("closeSidebarBtn");
 
+  menuBtn?.addEventListener("click", () => {
+    sidebar.classList.remove("-translate-x-full");
+  });
+  closeBtn?.addEventListener("click", () => {
+    sidebar.classList.add("-translate-x-full");
+  });
   // 🧭 1️⃣ Load dữ liệu ban đầu từ API
   async function loadSettings() {
     try {
