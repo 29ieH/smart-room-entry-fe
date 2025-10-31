@@ -210,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td class="px-4 py-3">${log.id}</td>
         <td class="px-4 py-3 font-semibold">${log.roomNumber}</td>
         <td class="px-4 py-3">${log.licensePlateNumber}</td>
+        <td class="px-4 py-3 text-center">${log.type}</td>
         <td class="px-4 py-3 text-center">${log.brand}</td>
         <td class="px-4 py-3 text-center">${translateColor(log.color)}</td>
         <td class="px-4 py-3 italic text-gray-600">${log.note || "-"}</td>
