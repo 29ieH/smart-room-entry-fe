@@ -75,8 +75,16 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
     `;
-
-    div.addEventListener("click", () => markAsRead(notify.id, div));
+    div.addEventListener("click", () => {
+      if (!notify.isRead) {
+        try {
+          markAsRead(notify.id, div);
+        } catch (error) {
+          console.error(`Mark as read notify ${notify.id} errors !!!`);
+        }
+        notify.isRead = true;
+      }
+    });
     notifyContainer.appendChild(div);
   }
 
