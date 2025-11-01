@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td class="px-4 py-3">${log.id}</td>
         <td class="px-4 py-3 font-semibold">${log.roomNumber}</td>
         <td class="px-4 py-3">${log.licensePlateNumber}</td>
-        <td class="px-4 py-3 text-center">${log.type}</td>
+        <td class="px-4 py-3 text-center">${translateVehicleType(log.type)}</td>
         <td class="px-4 py-3 text-center">${log.brand}</td>
         <td class="px-4 py-3 text-center">${translateColor(log.color)}</td>
         <td class="px-4 py-3 italic text-gray-600">${log.note || "-"}</td>
@@ -364,6 +364,14 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const lowerColor = color.toLowerCase();
     return colors[lowerColor] || "Không xác định";
+  }
+  function translateVehicleType(type) {
+    const type = {
+      gas: "Xe máy",
+      elec: "Xe điện",
+    };
+    const lowerType = type.toLowerCase();
+    return type[lowerType] || "Không xác định";
   }
   // // --- WebSocket (realtime) ---
   // const socket = io(`${baseUrl}/access-logs`, {
