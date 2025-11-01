@@ -366,7 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return colors[lowerColor] || "Không xác định";
   }
   function translateVehicleType(type) {
-    const type = {
+    const types = {
       gas: "Xe máy",
       elec: "Xe điện",
     };
