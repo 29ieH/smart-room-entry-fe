@@ -18,7 +18,56 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentData = [];
   let currentPage = 1;
   let pageSize = Number(pageSizeSelect?.value) || 10;
-
+  async function getPageByRoomId(roomId, pageSize) {
+    try {
+      const params = new URLSearchParams({
+        roomId: roomId,
+        pageSize: pageSize,
+      });
+      const res = await fetch(
+        `${baseUrl}/rooms/find-pages/${params.toString()}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      return data.page; // giả sử API trả về { page: 3 }
+    } catch (error) {
+      console.error("Đã có lỗi xảy ra vui lòng thử lại", error);
+      return null;
+    }
+  }
+  function highlightRow(roomId) {
+    const row = document.querySelector(`[data-room-id="${roomId}"]`);
+    if (row) {
+      row.classList.add("bg-yellow-100");
+      setTimeout(() => row.classList.remove("bg-yellow-100"), 2000);
+    }
+  }
+  function showLogPopup(message) {
+    const popup = document.getElementById("logPopup");
+    const logMessage = document.getElementById("logMessage");
+    logMessage.innerText = message;
+    popup.classList.remove("hidden");
+    // Tự ẩn sau 5 giây
+    setTimeout(() => {
+      popup.classList.add("hidden");
+    }, 5000);
+  }
+  document.getElementById("logPopup").addEventListener("click", async (e) => {
+    const popup = e.currentTarget;
+    const roomId = popup.dataset.roomId;
+    const pageSize = popup.dataset.pageSize;
+    const targetPage = await getPageByRoomId(roomId, pageSize);
+    if (targetPage) {
+      currentPage = targetPage;
+      await fetchData(currentPage, pageSize);
+      highlightRow(roomId);
+    }
+  });
   // --- Helper debounce ---
   function debounce(fn, delay = 500) {
     let timeoutId;
@@ -414,6 +463,33 @@ document.addEventListener("DOMContentLoaded", () => {
         return "Không rõ";
     }
   };
+  // --- WebSocket (realtime) ---
+  const socket = io(`${baseUrl}/rooms`, {
+    extraHeaders: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  socket.on("connect", () => console.log("✅ Socket connected"));
+  socket.on("newLog", (roomUpdated) => {
+    if (!roomUpdated || !roomUpdated.id) return;
+    if (currentPage === 1) {
+      const index = currentData.findIndex((item) => item.id == roomUpdated.id);
+      if (index != -1) {
+        currentData[index] = {
+          ...currentData[index],
+          ...roomUpdated,
+        };
+      }
+      renderTable(currentData);
+    } else {
+      const message = `Số lượng người hiện tại trong phòng ${roomUpdated.roomNumber} đã cập nhập. Nhấp vào để xem.`;
+      const popup = document.getElementById("logPopup");
+      popup.dataset.roomId = roomUpdated.id;
+      popup.dataset.pageSize = pageSize;
+      showLogPopup(message);
+    }
+  });
+  socket.on("disconnect", () => console.warn("Socket disconnected"));
 
   // --- Initial fetch ---
   fetchData(currentPage, pageSize);

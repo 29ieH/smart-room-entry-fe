@@ -371,7 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
       elec: "Xe điện",
     };
     const lowerType = type.toLowerCase();
-    return type[lowerType] || "Không xác định";
+    return types[lowerType] || "Không xác định";
   }
   // --- WebSocket (realtime) ---
   const socket = io(`${baseUrl}/license-plates`, {
