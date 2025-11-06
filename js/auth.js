@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const accountName = document.getElementById("accountName");
   const accountRole = document.getElementById("accountRole");
-  const baseUrl = "https://smart-room-entry-be-v1-0.onrender.com";
+  const baseUrl = "https://smart-room-entry-be.onrender.com";
   // const baseUrl = "http://localhost:3000";
   const checkLogin = async () => {
     const accessToken = localStorage.getItem("accessToken");

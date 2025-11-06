@@ -6,7 +6,7 @@ const modalCancel = document.getElementById("modalCancel");
 const modalSave = document.getElementById("modalSave");
 const modalClose = document.getElementById("modalClose");
 const MIN_SPINNER_TIME = 300;
-const baseUrl = "https://smart-room-entry-be-v1-0.onrender.com";
+const baseUrl = "https://smart-room-entry-be.onrender.com";
 // const baseUrl = "http://localhost:3000";
 // const baseUrl = "http://localhost:3000";
 function showSpinner() {

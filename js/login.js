@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const userNameInput = document.getElementById("userName");
   const passwordInput = document.getElementById("password");
   const submitBtn = loginForm.querySelector('button[type="submit"]');
-  const baseUrl = "https://smart-room-entry-be-v1-0.onrender.com";
+  const baseUrl = "https://smart-room-entry-be.onrender.com";
   // const baseUrl = "http://localhost:3000";
   let isSubmitting = false;
   const accessToken = localStorage.getItem("accessToken");

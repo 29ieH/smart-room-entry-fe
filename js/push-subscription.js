@@ -1,6 +1,6 @@
 const VAPID_PUBLIC_KEY =
   "BOYnmHw76TWX5vfGjerozh34mwZO18Kz-Kpmg1xkgGRVtO3WyS1NaaNQg3NuTnqV3sXzd540w-9mnAsjnnr4gzs";
-const baseUrl = "https://smart-room-entry-be-v1-0.onrender.com";
+const baseUrl = "https://smart-room-entry-be.onrender.com";
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
