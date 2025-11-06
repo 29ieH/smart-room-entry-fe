@@ -373,24 +373,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const lowerType = type.toLowerCase();
     return type[lowerType] || "Không xác định";
   }
-  // // --- WebSocket (realtime) ---
-  // const socket = io(`${baseUrl}/access-logs`, {
-  //   extraHeaders: {
-  //     Authorization: `Bearer ${accessToken}`,
-  //   },
-  // });
-  // socket.on("connect", () => console.log("✅ Socket connected"));
-  // socket.on("newLog", (log) => {
-  //   if (currentPage === 1) {
-  //     currentData.unshift(log);
-  //     if (currentData.length > pageSize) currentData.pop();
-  //     renderTable(currentData);
-  //   } else {
-  //     const message = `${log.note}. Nhấp vào để xem.`;
-  //     showLogPopup(message);
-  //   }
-  // });
-  // socket.on("disconnect", () => console.warn("Socket disconnected"));
-  // --- Initial fetch ---
+  // --- WebSocket (realtime) ---
+  const socket = io(`${baseUrl}/license-plates`, {
+    extraHeaders: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  socket.on("connect", () => console.log("✅ Socket connected"));
+  socket.on("newLog", (log) => {
+    if (currentPage === 1) {
+      currentData.unshift(log);
+      if (currentData.length > pageSize) currentData.pop();
+      renderTable(currentData);
+    } else {
+      const message = `${log.note}. Nhấp vào để xem.`;
+      showLogPopup(message);
+    }
+  });
+  socket.on("disconnect", () => console.warn("Socket disconnected"));
   fetchData(currentPage, pageSize);
 });
